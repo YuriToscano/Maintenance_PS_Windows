@@ -1,13 +1,11 @@
 # Script: Clear-TempAndRecent.ps1
 # Executar sempre como Administrador
 
-# Caminhos fixos do sistema
 $systemPaths = @(
     "C:\Windows\Prefetch",
     "C:\Windows\Temp"
 )
 
-# Pastas específicas por usuário
 $userPaths = @(
     "AppData\Local\Temp",
     "AppData\Roaming\Microsoft\Windows\Recent"
@@ -23,14 +21,16 @@ if (!(Test-Path $logDir)) {
 $timestamp = (Get-Date).ToString("yyyyMMdd-HHmmss")
 $logFile = Join-Path $logDir "CleanupLog-$timestamp.txt"
 
-# Função para registrar no log
+# Função para registrar no log e mostrar no console
 function Write-Log {
-    param([string]$Message)
+    param([string]$Message, [string]$Color = "White")
     $time = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-    Add-Content -Path $logFile -Value "$time - $Message"
+    $line = "$time - $Message"
+    Add-Content -Path $logFile -Value $line
+    Write-Host $line -ForegroundColor $Color
 }
 
-Write-Log "=== Início da limpeza ==="
+Write-Log "=== Início da limpeza ===" "Cyan"
 
 # Limpar pastas do sistema
 foreach ($path in $systemPaths) {
@@ -38,9 +38,9 @@ foreach ($path in $systemPaths) {
         Get-ChildItem -Path $path -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object {
             try {
                 Remove-Item $_.FullName -Force -Recurse -ErrorAction Stop
-                Write-Log "Apagado: $($_.FullName)"
+                Write-Log "Apagado: $($_.FullName)" "Green"
             } catch {
-                Write-Log "Falha ao apagar: $($_.FullName) - $($_.Exception.Message)"
+                Write-Log "Falha ao apagar: $($_.FullName) - $($_.Exception.Message)" "Red"
             }
         }
     }
@@ -56,9 +56,9 @@ Get-ChildItem $usersFolder -Directory | ForEach-Object {
             Get-ChildItem -Path $target -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object {
                 try {
                     Remove-Item $_.FullName -Force -Recurse -ErrorAction Stop
-                    Write-Log "Apagado: $($_.FullName)"
+                    Write-Log "Apagado: $($_.FullName)" "Green"
                 } catch {
-                    Write-Log "Falha ao apagar: $($_.FullName) - $($_.Exception.Message)"
+                    Write-Log "Falha ao apagar: $($_.FullName) - $($_.Exception.Message)" "Red"
                 }
             }
         }
@@ -67,18 +67,17 @@ Get-ChildItem $usersFolder -Directory | ForEach-Object {
 
 # Esvaziar a Lixeira
 try {
-    # Remove todos os itens da Lixeira
     (New-Object -ComObject Shell.Application).NameSpace(10).Items() | ForEach-Object {
         try {
             Remove-Item $_.Path -Force -Recurse -ErrorAction Stop
-            Write-Log "Lixeira apagado: $($_.Path)"
+            Write-Log "Lixeira apagado: $($_.Path)" "Green"
         } catch {
-            Write-Log "Falha ao apagar da Lixeira: $($_.Path) - $($_.Exception.Message)"
+            Write-Log "Falha ao apagar da Lixeira: $($_.Path) - $($_.Exception.Message)" "Red"
         }
     }
-    Write-Log "Lixeira esvaziada com sucesso"
+    Write-Log "Lixeira esvaziada com sucesso" "Yellow"
 } catch {
-    Write-Log "Falha ao esvaziar a Lixeira - $($_.Exception.Message)"
+    Write-Log "Falha ao esvaziar a Lixeira - $($_.Exception.Message)" "Red"
 }
 
-Write-Log "=== Fim da limpeza ==="
+Write-Log "=== Fim da limpeza ===" "Cyan"
