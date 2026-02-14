@@ -10,27 +10,27 @@ Cada pasta contém scripts específicos e um `README.md` explicando seu uso.
 Maintenance_PS_Windows/
 │
 ├── manutencao_update
-│   ├── SystemUpdate-Winget.ps1
+│   ├── SystemUpdate_Winget.ps1
 │   └── README.md
 │
 ├── manutencao_limpeza
-│   ├── Clear-TempAndRecent.ps1
+│   ├── Clear_TempAndRecent.ps1
 │   └── README.md
 │
 ├── manutencao_rede
-│   ├── Renovar-IP.ps1
-│   ├── Limpar-DNS.ps1
-│   ├── Testar-Conectividade.ps1
+│   ├── Renovar_IP.ps1
+│   ├── Limpar_DNS.ps1
+│   ├── Testar_Conectividade.ps1
 │   └── README.md
 │
 ├── manutencao_sistema
-│   ├── Verificar-Integridade.ps1
-│   ├── Monitorar-Servicos.ps1
+│   ├── Verificar_Integridade.ps1
+│   ├── Monitorar_Servicos.ps1
 │   └── README.md
 │
 ├── manutencao_segurança
-│   ├── Checar-Defender.ps1
-│   ├── Firewall-Status.ps1
+│   ├── Checar_Defender.ps1
+│   ├── Firewall_Status.ps1
 │   └── README.md
 │
 └── README.md  ← este arquivo
