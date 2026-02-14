@@ -1,34 +1,50 @@
-# Maintenance_PS_Windows
+# 🖥️ Maintenance_PS_Windows
 
-# 🛠️ Maintenance-PS-Windows
-
-Scripts em **PowerShell** para limpeza e manutenção do Windows.  
-Este repositório contém utilitários que ajudam a manter o sistema limpo, removendo arquivos temporários, itens recentes e esvaziando a lixeira de todos os usuários.
+Scripts em **PowerShell** para manutenção do Windows.  
+Cada pasta contém scripts específicos e um `README.md` explicando seu uso.
 
 ---
 
-## 📂 Funcionalidades
-- Limpeza das pastas:
-  - `C:\Windows\Prefetch`
-  - `C:\Windows\Temp`
-  - `C:\Users\<Usuário>\AppData\Local\Temp`
-  - `C:\Users\<Usuário>\AppData\Roaming\Microsoft\Windows\Recent`
-- Esvaziamento da **Lixeira** de todos os usuários.
-- Geração de **log detalhado** em `C:\Temp` com data e hora da execução.
+## 📂 Estrutura
+
+Maintenance_PS_Windows/
+│
+├── manutencao_update
+│   ├── SystemUpdate-Winget.ps1
+│   └── README.md
+│
+├── manutencao_limpeza
+│   ├── Clear-TempAndRecent.ps1
+│   └── README.md
+│
+├── manutencao_rede
+│   ├── Renovar-IP.ps1
+│   ├── Limpar-DNS.ps1
+│   ├── Testar-Conectividade.ps1
+│   └── README.md
+│
+├── manutencao_sistema
+│   ├── Verificar-Integridade.ps1
+│   ├── Monitorar-Servicos.ps1
+│   └── README.md
+│
+├── manutencao_segurança
+│   ├── Checar-Defender.ps1
+│   ├── Firewall-Status.ps1
+│   └── README.md
+│
+└── README.md  ← este arquivo
+
+- **manutencao_update** → Atualização de pacotes com winget  
+- **manutencao_limpeza** → Limpeza de temporários e lixeira  
+- **manutencao_rede** → Scripts de rede (IP, DNS, conectividade)  
+- **manutencao_sistema** → Verificação de integridade e serviços  
+- **manutencao_segurança** → Checagem de Defender e Firewall  
 
 ---
 
-## 📜 Script principal
+## 🚀 Como clonar
 
-Arquivo: **Clear-TempAndRecent.ps1**
-
-- Executar sempre como **Administrador**.
-- Cria um log em `C:\Temp\CleanupLog-YYYYMMDD-HHMMSS.txt`.
-
----
-
-## ▶️ Como usar
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/Maintenance_PS_Windows.git
+```bash
+git clone https://github.com/YuriToscano/Maintenance_PS_Windows.git
+cd Maintenance_PS_Windows
